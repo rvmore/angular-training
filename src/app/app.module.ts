@@ -6,14 +6,11 @@ import { AppComponent } from './app.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ServerListComponent } from './server-list/server-list.component';
-import { AddServerComponent } from './add-server/add-server.component';
-
+import { EditUserComponent } from './edit-user/edit-user.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ServerListComponent,
-    AddServerComponent
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

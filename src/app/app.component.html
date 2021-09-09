@@ -1,28 +1,24 @@
-<div class="wrapper">
-    <div *ngIf="showEditForm">
-        <app-add-server [server]="selectedServer" (updateServer)="onServerUpdated($event)"></app-add-server>
-    </div>
-
-    <div>
-        <!-- <app-server-list></app-server-list> -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Server Name</th>
-                    <th>Server IP Address</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr *ngFor="let server of serverList">
-                    <td>{{server.name}}</td>
-                    <td>{{server.ipAddress}}</td>
-                    <td><button (click)="onSelectServer(server)">Edit</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container mt-5 w-50">
+    <table class="table table-hover">
+        <thead class="bg-dark" style="color: #fff;">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userList">
+                <td>{{user.name}}</td>
+                <td>{{user.age}}</td>
+                <td>
+                    <span [ngClass]="{'bg-danger': !user.status}" class="bg-primary p-2" style="border-radius: 15px; color:#fff">{{user.status ? 'Active':'Inactive'}}</span>
+                </td>
+                <td>
+                    <button class="btn btn-info">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-<div #myDiv></div>

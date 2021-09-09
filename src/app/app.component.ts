@@ -6,50 +6,51 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('myDiv') myDiv: ElementRef;
-  showEditForm = false;
-
-  serverList: { id: number, name: string, ipAddress: string }[] = [
+  userList: { id: number, name: string; age: number, status: boolean }[] = [
     {
       id: 0,
-      name: 'Server 1',
-      ipAddress: '10.20.2.225'
+      name: 'Ganesh',
+      age: 29,
+      status: false
     },
     {
-      id: 1,
-      name: 'Server 2',
-      ipAddress: '10.20.2.200'
+      id: 0,
+      name: 'Kunal',
+      age: 29,
+      status: true
     },
     {
-      id: 2,
-      name: 'Server 3',
-      ipAddress: '10.20.2.150'
+      id: 0,
+      name: 'Dhruva',
+      age: 29,
+      status: false
     },
     {
-      id: 3,
-      name: 'Server 4',
-      ipAddress: '10.20.2.80'
-    }
+      id: 0,
+      name: 'Kalyani',
+      age: 29,
+      status: true
+    },
+    {
+      id: 0,
+      name: 'Mahesh',
+      age: 29,
+      status: true
+    },
   ];
 
-  selectedServer: { id: number, name: string, ipAddress: string } = { id: null, name: '', ipAddress: '' }
+  selectedUser: { id: number, name: string, age: number };
+  // isUserDataAvailable = false;
 
   ngOnInit(): void {
+    // this.isUserDataAvailable = true;
+    // // failed to fetch data from backend
+    // setTimeout(() => {
+    //   this.isUserDataAvailable = false;
+    // }, 10000);
   }
 
-  onSelectServer(server) {
-    this.showEditForm = true;
-    this.selectedServer = server;
-  }
-
-  onServerUpdated(event) {
-    const id = event.id;
-
-    this.serverList.forEach(server => {
-      if (server.id === id) {
-        server.ipAddress = event.ipAddress;
-        server.name = event.name;
-      }
-    })
+  getFirstLetter(name): string {
+    return name.toString()[0];
   }
 }
