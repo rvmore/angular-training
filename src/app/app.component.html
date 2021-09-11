@@ -1,9 +1,19 @@
+<div class="container mt-5 w-50" *ngIf="selectedUser">
+    <app-edit-user [user]="selectedUser"></app-edit-user>
+</div>
+
+<button class="btn btn-danger" (click)="onHideUserForm()">Hide User Form</button>
+
+<input #myInput type="text">
+
+
 <div class="container mt-5 w-50">
     <table class="table table-hover">
         <thead class="bg-dark" style="color: #fff;">
             <tr>
                 <th>Name</th>
                 <th>Age</th>
+                <th>Birth Date</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -11,12 +21,14 @@
         <tbody>
             <tr *ngFor="let user of userList">
                 <td>{{user.name}}</td>
-                <td>{{user.age}}</td>
+                <td>{{user.age | number: '1.1-2'}}</td>
+                <td>{{user.birthDate | date:'dd-MM-yyyy'}}</td>
                 <td>
-                    <span [ngClass]="{'bg-danger': !user.status}" class="bg-primary p-2" style="border-radius: 15px; color:#fff">{{user.status ? 'Active':'Inactive'}}</span>
+                    <span [ngClass]="{'bg-danger': !user.status}" class="bg-primary p-2"
+                        style="border-radius: 15px; color:#fff">{{user.status ? 'Active':'Inactive'}}</span>
                 </td>
                 <td>
-                    <button class="btn btn-info">Delete</button>
+                    <button class="btn btn-info" (click)="onEditUser(user)">Edit</button>
                 </td>
             </tr>
         </tbody>
