@@ -1,23 +1,27 @@
-<div class="container w-50 mt-2 mb-5">
-    <div class="row form-group">
-        <label for="name" class="label">Name</label>
-        <input type="text" class="form-control" [(ngModel)]="inputUser.name">
+<ng-container *ngIf="showForm">
+    <div class="container w-50 mt-2 mb-5">
+        <div class="row form-group">
+            <label for="name" class="label">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedUser.name">
+        </div>
+        <div class="row form-group">
+            <label for="age" class="label">Age</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedUser.age">
+        </div>
+        <div class="row form-group">
+            <label for="birthDate" class="label">Birth Date</label>
+            <input type="datetime" class="form-control" [(ngModel)]="selectedUser.birthDate">
+        </div>
+        <div class="row form-check mb-2">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                [(ngModel)]="selectedUser.status">
+            <label class="form-check-label" for="flexCheckDefault">
+                Status
+            </label>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary">Save</button>
+        </div>
     </div>
-    <div class="row form-group">
-        <label for="age" class="label">Age</label>
-        <input type="text" class="form-control" [(ngModel)]="inputUser.age">
-    </div>
-    <div class="row form-group">
-        <label for="birthDate" class="label">Birth Date</label>
-        <input type="datetime" class="form-control" [(ngModel)]="inputUser.birthDate">
-    </div>
-    <div class="row form-check mb-2">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [(ngModel)]="inputUser.status">
-        <label class="form-check-label" for="flexCheckDefault">
-            Status
-        </label>
-    </div>
-    <div class="row">
-        <button class="btn btn-primary">Save</button>
-    </div>
-</div>
+
+</ng-container>

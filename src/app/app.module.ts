@@ -7,10 +7,13 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserService } from './services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
-    EditUserComponent
+    EditUserComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +21,9 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     CommonModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
