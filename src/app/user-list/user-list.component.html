@@ -1,3 +1,5 @@
+<h1 class="text-primary">{{pageTitle}}</h1>
+
 <div class="container mt-5 w-50">
     <table class="table table-hover">
         <thead class="bg-dark" style="color: #fff;">
@@ -20,6 +22,9 @@
                 </td>
                 <td>
                     <button class="btn btn-info" (click)="onEditUser(user)">Edit</button>
+                    <!-- <a [routerLink]="['/edit-user']" [state]="user" routerLinkActive="router-link-active" >Edit</a> -->
+                    <!-- <button class="btn btn-info">Edit</button> -->
+                    <!-- <a class="btn btn-info" [routerLink]="['/edit-user']" [state]="user" routerLinkActive="router-link-active" >Edit</a> -->
                 </td>
             </tr>
         </tbody>

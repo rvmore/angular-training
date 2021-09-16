@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { IUser } from '../shared/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -8,20 +9,36 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  userList = [];
+  userList: IUser[] = [];
+  pageTitle: string;
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.userList = this.userService.userList;
+
+    this.pageTitle = this.activatedRoute.snapshot.data.title;
   }
 
   onEditUser(user): void {
-    this.userService.selectedUser = user;
-    this.router.navigate(['edit-user']);
+
+    // this.router.navigateByUrl(`/edit-user?id=${user.id}`);
+
+    this.router.navigate([`/edit-user/${user.id}`]);
+
+    // const updatedBirthDate = `${user.birthDate.getFullYear()},${user.birthDate.getMonth(2)},${user.birthDate.getDate()}`;
+
+    // const updatedUser = {
+    //   ...user,
+    //   birthDate: updatedBirthDate
+    // };
+
+    // this.router.navigate(['/edit-user'], { state: updatedUser });
+
   }
 
 }

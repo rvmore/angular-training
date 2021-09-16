@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { IUser } from '../shared/models/user.model';
 
 @Injectable()
 export class UserService {
-  selectedUser: { id: number, name: string, age: number, status: boolean, birthDate: Date };
+  selectedUser: IUser;
 
-  userList: { id: number, name: string; age: number, birthDate: Date, status: boolean }[] = [
+  userList: IUser[] = [
     {
       id: 0,
       name: 'Ganesh',
@@ -13,28 +14,28 @@ export class UserService {
       birthDate: new Date('1996-07-29')
     },
     {
-      id: 0,
+      id: 1,
       name: 'Kunal',
       age: 29,
       status: true,
       birthDate: new Date('1994-07-29')
     },
     {
-      id: 0,
+      id: 2,
       name: 'Dhruva',
       age: 29,
       status: false,
       birthDate: new Date('1992-07-05')
     },
     {
-      id: 0,
+      id: 3,
       name: 'Kalyani',
       age: 29,
       status: true,
       birthDate: new Date('1880-07-29')
     },
     {
-      id: 0,
+      id: 4,
       name: 'Mahesh',
       age: 29,
       status: true,
@@ -43,4 +44,26 @@ export class UserService {
   ];
 
   constructor() { }
+
+  getUserById(id): IUser {
+    return this.userList.find(user => user.id === +id);
+  }
+
+  updateUserById(searchId: number, updatedUser: IUser): void {
+    const users = this.userList;
+
+    this.userList = users.filter(user => {
+      if (user.id === searchId) {
+        user.id = updatedUser.id;
+        user.name = updatedUser.name;
+        user.age = updatedUser.age;
+        user.birthDate = updatedUser.birthDate;
+        user.status = updatedUser.status;
+
+        return user;
+      }
+
+      return user;
+    });
+  }
 }
