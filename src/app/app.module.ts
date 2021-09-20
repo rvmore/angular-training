@@ -6,14 +6,13 @@ import { AppComponent } from './app.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EditUserComponent } from './edit-user/edit-user.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserService } from './services/user.service';
+import { RegisterUserComponent } from './register-user/register-user.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 @NgModule({
   declarations: [
     AppComponent,
-    EditUserComponent,
-    UserListComponent
+    RegisterUserComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +21,6 @@ import { UserService } from './services/user.service';
     FormsModule
   ],
   providers: [
-    UserService
   ],
   bootstrap: [AppComponent]
 })

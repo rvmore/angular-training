@@ -1,0 +1,81 @@
+<div class="text-primary text-center mt-5">
+    <h3>Register User</h3>
+</div>
+
+<div class="container w-25 mt-5">
+    <form #registerUser="ngForm" class="form" (ngSubmit)="onSubmit(registerUser.form)">
+        <div class="row form-group">
+            <label for="" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" ngModel required (change)="onNameChange($event)">
+            <div
+                *ngIf="(registerUser.submitted || registerUser.form.get('name')?.touched) && registerUser.form.get('name')?.errors">
+                <small class="text-danger" *ngIf="registerUser.form.get('name').errors.required">Name is
+                    required.</small>
+                <small class="text-danger" *ngIf="registerUser.form.get('name').errors.noDot">Name should not contain
+                    (.)</small>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="" class="form-label">Email</label>
+            <input type="email" pattern="^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$" class="form-control" name="email" ngModel
+                required>
+            <div
+                *ngIf="(registerUser.submitted || registerUser.form.get('email')?.touched) && registerUser.form.get('email')?.errors">
+                <small class="text-danger" *ngIf="registerUser.form.get('email').errors.required">Email is
+                    required.</small>
+                <small class="text-danger" *ngIf="registerUser.form.get('email').errors.pattern">Email is
+                    invalid. Should be a valid email address.</small>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="" class="form-label">Password</label>
+            <input type="text" class="form-control" name="password" ngModel required>
+            <div
+                *ngIf="(registerUser.submitted || registerUser.form.get('password')?.touched) && registerUser.form.get('password')?.errors">
+                <small class="text-danger" *ngIf="registerUser.form.get('password').errors.required">Password is
+                    required.</small>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="" class="form-label">Mobile</label>
+            <input type="text" class="form-control" name="mobile" ngModel required>
+            <div
+                *ngIf="(registerUser.submitted || registerUser.form.get('mobile')?.touched) && registerUser.form.get('mobile')?.errors">
+                <small class="text-danger" *ngIf="registerUser.form.get('mobile').errors.required">Password is
+                    required.</small>
+            </div>
+        </div>
+        <fieldset ngModelGroup="address">
+            <div class="row form-group">
+                <label for="" class="form-label">Street</label>
+                <input type="text" class="form-control" name="street" ngModel>
+            </div>
+            <div class="row form-group">
+                <label for="" class="form-label">Area</label>
+                <input type="text" class="form-control" name="area" ngModel>
+            </div>
+            <div class="row form-group">
+                <label for="" class="form-label">City</label>
+                <input type="text" class="form-control" name="city" ngModel>
+            </div>
+            <div class="row form-group">
+                <label for="" class="form-label">Pin code</label>
+                <input type="text" class="form-control" name="pincode" ngModel>
+            </div>
+        </fieldset>
+
+        <fieldset ngModelGroup="hobbies">
+            <div class="row form-group">
+                <label for="" class="form-label">Hobbies</label>
+                <div *ngFor="let hobby of hobbies; let i = index">
+                    <input type="text" class="form-control mt-2" name="{{i}}" ngModel>
+                </div>
+            </div>
+            <button class="btn btn-success" type="button" (click)="addHobby()">Add Hobbies</button>
+        </fieldset>
+
+        <div class="row mt-2">
+            <button class="btn btn-info w-100" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
