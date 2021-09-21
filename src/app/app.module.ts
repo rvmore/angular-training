@@ -5,20 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterUserComponent } from './register-user/register-user.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterUserComponent,
-    UserDetailsComponent
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
   ],

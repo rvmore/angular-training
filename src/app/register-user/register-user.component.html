@@ -1,81 +1,80 @@
-<div class="text-primary text-center mt-5">
-    <h3>Register User</h3>
-</div>
-
-<div class="container w-25 mt-5">
-    <form #registerUser="ngForm" class="form" (ngSubmit)="onSubmit(registerUser.form)">
+<div class="container w-50 mt-5">
+    <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
         <div class="row form-group">
             <label for="" class="form-label">Name</label>
-            <input type="text" class="form-control" name="name" ngModel required (change)="onNameChange($event)">
-            <div
-                *ngIf="(registerUser.submitted || registerUser.form.get('name')?.touched) && registerUser.form.get('name')?.errors">
-                <small class="text-danger" *ngIf="registerUser.form.get('name').errors.required">Name is
-                    required.</small>
-                <small class="text-danger" *ngIf="registerUser.form.get('name').errors.noDot">Name should not contain
-                    (.)</small>
+            <input type="text" class="form-control" formControlName="name">
+            <div *ngIf="(registerForm.get('name').touched || isFormSubmitted) && registerForm.get('name').errors"
+                class="text-danger">
+                <small>Name is required.</small>
             </div>
         </div>
         <div class="row form-group">
             <label for="" class="form-label">Email</label>
-            <input type="email" pattern="^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$" class="form-control" name="email" ngModel
-                required>
-            <div
-                *ngIf="(registerUser.submitted || registerUser.form.get('email')?.touched) && registerUser.form.get('email')?.errors">
-                <small class="text-danger" *ngIf="registerUser.form.get('email').errors.required">Email is
-                    required.</small>
-                <small class="text-danger" *ngIf="registerUser.form.get('email').errors.pattern">Email is
-                    invalid. Should be a valid email address.</small>
-            </div>
-        </div>
-        <div class="row form-group">
-            <label for="" class="form-label">Password</label>
-            <input type="text" class="form-control" name="password" ngModel required>
-            <div
-                *ngIf="(registerUser.submitted || registerUser.form.get('password')?.touched) && registerUser.form.get('password')?.errors">
-                <small class="text-danger" *ngIf="registerUser.form.get('password').errors.required">Password is
-                    required.</small>
+            <input type="text" class="form-control" formControlName="email">
+            <div *ngIf="(registerForm.get('email').touched || isFormSubmitted) && registerForm.get('email').errors"
+                class="text-danger">
+                <small *ngIf="registerForm.get('email').errors.required">Email is required.</small>
+                <small *ngIf="registerForm.get('email').errors.pattern">Email is invalid.</small>
             </div>
         </div>
         <div class="row form-group">
             <label for="" class="form-label">Mobile</label>
-            <input type="text" class="form-control" name="mobile" ngModel required>
-            <div
-                *ngIf="(registerUser.submitted || registerUser.form.get('mobile')?.touched) && registerUser.form.get('mobile')?.errors">
-                <small class="text-danger" *ngIf="registerUser.form.get('mobile').errors.required">Password is
-                    required.</small>
+            <input type="text" class="form-control" formControlName="mobile">
+            <div *ngIf="(registerForm.get('mobile').touched || isFormSubmitted) && registerForm.get('mobile').errors"
+                class="text-danger">
+                <small>Mobile is required.</small>
             </div>
         </div>
-        <fieldset ngModelGroup="address">
+        <div class="row form-group">
+            <label for="" class="form-label">Password</label>
+            <input type="text" class="form-control" formControlName="password">
+            <div *ngIf="(registerForm.get('password').touched || isFormSubmitted) && registerForm.get('password').errors"
+                class="text-danger">
+                <small>Password is required.</small>
+            </div>
+        </div>
+
+        <div formGroupName="address">
             <div class="row form-group">
                 <label for="" class="form-label">Street</label>
-                <input type="text" class="form-control" name="street" ngModel>
-            </div>
-            <div class="row form-group">
-                <label for="" class="form-label">Area</label>
-                <input type="text" class="form-control" name="area" ngModel>
+                <input type="text" class="form-control" formControlName="street">
             </div>
             <div class="row form-group">
                 <label for="" class="form-label">City</label>
-                <input type="text" class="form-control" name="city" ngModel>
+                <input type="text" class="form-control" formControlName="city">
             </div>
             <div class="row form-group">
                 <label for="" class="form-label">Pin code</label>
-                <input type="text" class="form-control" name="pincode" ngModel>
+                <input type="text" class="form-control" formControlName="pinCode">
             </div>
-        </fieldset>
+        </div>
 
-        <fieldset ngModelGroup="hobbies">
-            <div class="row form-group">
+        <div formArrayName="hobbies">
+            <div class="row">
                 <label for="" class="form-label">Hobbies</label>
-                <div *ngFor="let hobby of hobbies; let i = index">
-                    <input type="text" class="form-control mt-2" name="{{i}}" ngModel>
+            </div>
+                
+            <!-- <div class="row" *ngFor="let control of hobbiesArray.controls; let i = index">
+                <input type="text" class="form-control"> 
+                <button class="btn btn-danger" type="button">Remove</button>
+            </div>
+            <button class="btn btn-info mt-2" type="button" (click)="addNewHobby()">Add</button> -->
+
+            <div class="row mb-2" *ngFor="let control of hobbiesArray.controls; let i = index">
+                <div class="col-md-6">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger" type="button" (click)="removeHobbies(i)">Remove</button>
                 </div>
             </div>
-            <button class="btn btn-success" type="button" (click)="addHobby()">Add Hobbies</button>
-        </fieldset>
+            <button class="btn btn-info mt-2 mb-3" type="button" (click)="addNewHobby()">Add</button>
+        </div>
 
-        <div class="row mt-2">
-            <button class="btn btn-info w-100" type="submit">Submit</button>
+        <div class="row">
+            <button class="btn btn-primary w-100" type="submit">Submit</button>
         </div>
     </form>
 </div>
+
+<p class="text-success text-center mt-5">{{greetUser}}</p>

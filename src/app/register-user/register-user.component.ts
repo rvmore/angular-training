@@ -1,49 +1,54 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ControlContainer, NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.css'],
-  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }]
+  styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
-  @ViewChild('registerUser') registerUserForm: NgForm;
-  hobbies = [''];
+  registerForm: FormGroup;
+  isFormSubmitted = false;
+  greetUser = '';
 
   constructor() { }
 
   ngOnInit(): void {
+    this.setRegisterForm();
+
+    this.registerForm.get('name').valueChanges.subscribe(value => (this.greetUser = `Welcome ${value}!`));
+  }
+
+  get hobbiesArray(): FormArray {
+    return this.registerForm.get('hobbies') as FormArray;
+  }
+
+  setRegisterForm(): void {
+    this.registerForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      mobile: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      address: new FormGroup({
+        street: new FormControl(''),
+        city: new FormControl(''),
+        pinCode: new FormControl('')
+      }),
+      hobbies: new FormArray([new FormControl('')])
+    });
   }
 
   onSubmit(form): void {
-    const { hobbies, ...payload } = form.value;
-
-    const formattedHobbies = [];
-    for (const key in hobbies) {
-      formattedHobbies.push(hobbies[key]);
-    }
-
-    const formattedFormData = {
-      ...payload,
-      hobbies: formattedHobbies
-    }
-
-    console.log(formattedFormData);
+    this.isFormSubmitted = true;
+    console.log(form);
   }
 
-  onNameChange(event): void {
-    const name = event.target.value;
-    if (name.includes('.')) {
-      this.registerUserForm.form.controls.name.setErrors({ noDot: true });
-      return;
-    }
-
-    this.registerUserForm.form.controls.name.setErrors(null);
+  addNewHobby(): void {
+    this.hobbiesArray.push(new FormControl(''));
   }
 
-  addHobby(): void {
-    this.hobbies.push('');
+  removeHobbies(index): void {
+    this.hobbiesArray.removeAt(index);
   }
 
 }
