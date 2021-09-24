@@ -1,0 +1,30 @@
+<div class="container p-5 table-container m-5">
+    <div class="mb-2 table_header">
+        <div>
+            <h4 class="portlet-title">Users List</h4>
+        </div>
+        <div><button class="btn btn-primary" (click)="onAddEditUser()">+ Add User</button></div>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Date of Birth</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userList">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.mobile}}</td>
+                <td>{{user.dob | date: 'dd-MM-yyyy'}}</td>
+                <td>{{user.role}}</td>
+                <td><button class="btn btn-info" (click)="onAddEditUser()">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
