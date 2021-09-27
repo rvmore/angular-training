@@ -10,11 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
     RegisterUserComponent,
-    UserListComponent
+    UserListComponent,
+    UserDetailsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

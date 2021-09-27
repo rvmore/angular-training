@@ -1,0 +1,28 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: auto 30px;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 5px 30px;
+}
+
+li {
+  margin: 10px;
+}

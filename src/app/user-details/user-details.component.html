@@ -1,0 +1,31 @@
+<ng-container *ngIf="userDetails; else showNoUsersAvailable">
+  <div class="user-container container w-50 mt-5" style="height: 350px">
+    <div class="row mt-2">
+      <div class="col-md-6">Name</div>
+      <div class="col-md-6">{{ userDetails.name }}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">Email</div>
+      <div class="col-md-6">{{ userDetails.email }}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">Mobile Number</div>
+      <div class="col-md-6">{{ userDetails.mobile }}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">Date of Birth</div>
+      <div class="col-md-6">{{ userDetails.dob | date: "dd-MM-yyyy" }}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">Role</div>
+      <div class="col-md-6">{{ userDetails.role }}</div>
+    </div>
+    <div class="row mt-5">
+        <button class="btn btn-danger" (click)="onNavigateBack()" type="button">Return to Users List</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #showNoUsersAvailable>
+  <div class="text-info mt-5">No User details available.</div>
+</ng-template>
